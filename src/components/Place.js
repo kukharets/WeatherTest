@@ -10,7 +10,7 @@ class Place extends Component {
 
     render() {
         const {data, selectedPlace} = this.props;
-        const {city, key} = data;
+        const {address, key} = data;
         const attachClass =
             selectedPlace && selectedPlace.key == key
                 ? "row m-4 lol hoverable "
@@ -18,10 +18,10 @@ class Place extends Component {
         return (
             <div
                 onClick={this.selectPlace}
-                style={{marginTop: "0", height: "100px"}}
+                style={{marginTop: "0", height: "30px"}}
                 className={attachClass}>
 
-                {city}
+                {address}
             </div>
         );
     }

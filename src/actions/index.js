@@ -1,6 +1,6 @@
 import { placesRef } from "../config/firebase";
 import $ from 'jquery';
-import { FETCH_PLACES, SELECT_PLACE, DELETE_PLACE, ADD_PLACE } from "./types";
+import { FETCH_PLACES, SELECT_PLACE, DELETE_PLACE } from "./types";
 
 export const addPlace = newPlace => async dispatch => {
     placesRef.push().set(newPlace);
@@ -36,11 +36,12 @@ export const selectPlace = place => async dispatch => {
         dataType: "json",
         success: function(data){
             console.log(data)
-
+            place.weather = data.main;
+            dispatch({
+                type: SELECT_PLACE,
+                payload: place,
+            });
         }
     });
-    dispatch({
-        type: SELECT_PLACE,
-        payload: place,
-    });
+
 };
