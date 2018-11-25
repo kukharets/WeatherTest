@@ -1,5 +1,4 @@
-import { ADD_PATH_TOOGLE_MODAL, ADD_MARKER, ADD_DISTANCE, FETCH_PLACES,
-    SELECT_PLACE, ADD_MARKER_REF, FILTER_TRAVELS, DELETE_PLACE, ADD_PLACE } from "../actions/types";
+import { FETCH_PLACES, SELECT_PLACE, DELETE_PLACE } from "../actions/types";
 
 const INIT_STATE = {
     places: [],

@@ -3,6 +3,12 @@ import {addPlace, deletePlace} from "../actions";
 import {connect} from "react-redux";
 
 class Weather extends Component {
+    constructor(){
+        super();
+        this.state = {
+            type: 'daily',
+        }
+    }
     addPlace = () => {
         const { selectedPlace, addPlace } = this.props;
         addPlace(selectedPlace);
@@ -16,11 +22,12 @@ class Weather extends Component {
         const { selectedPlace } = this.props;
         const { address, weather } = selectedPlace;
         const { temp_min, temp_max, visibility } = weather;
-        const temp = temp_min == temp_max ? temp_max : " min: " + {temp_min} + " , max: " + {temp_max};
+        const temp = temp_min === temp_max ? temp_max : " min: " + {temp_min} + " , max: " + {temp_max};
         return (
             <div>
                 {weather &&
                 <div>
+                    {this.state.daily && <div></div>}
                     <b>Weather in</b> {address}:
                     <br/>
                     Visibility: { visibility }

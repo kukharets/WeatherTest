@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {connect} from "react-redux";
 import { selectPlace, addPlace } from "../actions";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
@@ -13,12 +13,7 @@ class LocationSearchInput extends React.Component {
         this.setState({ address });
     };
 
-    getName = results => {
-        console.log(results)
-    }
-
     handleSelect = address => {
-        this.getName(address);
         geocodeByAddress(address)
             .then(results => getLatLng(results[0]))
             .then(latLng => this.props.selectPlace({address, coordinates: latLng}))

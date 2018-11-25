@@ -12,7 +12,7 @@ class Place extends Component {
         const {data, selectedPlace} = this.props;
         const {address, key} = data;
         const attachClass =
-            selectedPlace && selectedPlace.key == key
+            selectedPlace && selectedPlace.key === key
                 ? "row m-4 lol hoverable "
                 : "row m-4 bg-light hoverable";
         return (

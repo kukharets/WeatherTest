@@ -17,14 +17,14 @@ class App extends Component {
         this.props.fetchPlaces();
     }
 
-    deletePlace = () => {
-        const {places, selectedPlace, deletePlace} = this.props;
-        deletePlace(selectedPlace.key);
-    };
-    addPlace = () => {
-        const {selectedPlace, addPlace} = this.props;
-        addPlace(selectedPlace.key);
-    };
+    // deletePlace = () => {
+    //     const {selectedPlace, deletePlace} = this.props;
+    //     deletePlace(selectedPlace.key);
+    // };
+    // addPlace = () => {
+    //     const {selectedPlace, addPlace} = this.props;
+    //     addPlace(selectedPlace.key);
+    // };
 
     render() {
         const {places, selectedPlace, selectPlace} = this.props;
@@ -65,7 +65,7 @@ class App extends Component {
                         {this.props.selectedPlace ? (
                             <Weather/>
                         ) : (
-                            <h3 class="text-center">Choose the location</h3>
+                            <h3 className="text-center">Choose the location</h3>
                         )}
                     </div>
                 </div>
