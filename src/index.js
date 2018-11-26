@@ -1,6 +1,6 @@
 import "materialize-css/dist/css/materialize.min.css";
 import "materialize-css/dist/js/materialize.min.js";
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import './index.css';
 import { Provider } from "react-redux";
@@ -12,9 +12,38 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
+class AppWrapper extends Component {
+    state = {
+        gmapsLoaded: false,
+    }
+
+    initMap = () => {
+        this.setState({
+            gmapsLoaded: true,
+        })
+    }
+    componentDidMount () {
+        window.initMap = this.initMap
+        const gmapScriptEl = document.createElement(`script`)
+        gmapScriptEl.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDOWYyDeWeCedhIjL973Zh1k_FJgqPW9H8&callback=initMap&libraries=places`
+        document.querySelector(`body`).insertAdjacentElement(`beforeend`, gmapScriptEl)
+    }
+
+    render () {
+        return (
+            <div>
+                {this.state.gmapsLoaded && (
+                    <div>{this.props.children}</div>
+                )}
+            </div>
+        )
+    }
+}
+
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <AppWrapper><App /></AppWrapper>
+
     </Provider>,
     document.getElementById("root")
 );

@@ -1,10 +1,5 @@
-
-export const ADD_PATH_TOOGLE_MODAL = "ADD_PATH_TOOGLE_MODAL";
-export const ADD_MARKER = "ADD_MARKER";
-export const ADD_DISTANCE = "ADD_DISTANCE";
 export const FETCH_PLACES = "FETCH_PLACES";
 export const SELECT_PLACE = "SELECT_PLACE";
-export const ADD_MARKER_REF = "ADD_MARKER_REF";
-export const FILTER_TRAVELS = "FILTER_TRAVELS";
 export const DELETE_PLACE = "DELETE_PLACE";
-export const ADD_PLACE = "ADD_PLACE";
+export const FETCH_WEATHER = "FETCH_WEATHER";
+export const FETCH_WEATHER_SUCCESS = "FETCH_WEATHER_SUCCESS";

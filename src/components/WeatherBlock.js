@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import {addPlace, deletePlace, fetchWeather} from "../actions";
 import {connect} from "react-redux";
 import DailyWeather from './DailyWeather';
-
+import WeeklyWeather from './WeeklyWeather';
+import { Button, ButtonGroup } from 'reactstrap';
 class WeatherBlock extends Component {
     constructor(){
         super();
@@ -19,19 +20,31 @@ class WeatherBlock extends Component {
         const { selectedPlace, deletePlace } = this.props;
         deletePlace(selectedPlace.key);
     };
+    onRadioBtnClick = () => {
+        const { type } = this.state;
+        this.setState({
+            type: type === 'daily' ? 'weekly' : 'daily'
+        })
+    };
     render() {
         const { selectedPlace } = this.props;
         const { address } = selectedPlace;
-        console.log("render", this.props)
         return (
             <div>
                 <div>
-                    <b>Weather in</b> {address}:
-                    <br/>
-                    {this.state.type === 'daily' && <DailyWeather />}
-
-                    <button onClick={this.addPlace}>ADD PLACE</button>
-                    <button onClick={this.deletePlace}>DELETE PLACE</button>
+                    <h3>
+                        <b>Weather in</b> {address}:
+                        <br/>
+                        <ButtonGroup>
+                            <Button color="second" onClick={this.onRadioBtnClick} active={this.state.type === 'daily'}>Daily</Button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <Button color="gray" onClick={this.onRadioBtnClick} active={this.state.type === 'weekly'}>Weekly</Button>
+                        </ButtonGroup>
+                        {this.state.type === 'daily' && <DailyWeather />}
+                        {this.state.type === 'weekly' && <WeeklyWeather />}
+                        {!selectedPlace.key && <button className="btn btn-primary" onClick={this.addPlace}>SAVE PLACE</button>}
+                        {selectedPlace.key && <button className="btn btn-danger" onClick={this.deletePlace}>DELETE PLACE</button>}
+                    </h3>
                 </div>
             </div>
         );
@@ -42,7 +55,6 @@ const mapStateToProps = ({ basic }) => {
     const {
         selectedPlace,
     } = basic;
-    console.log("mapStateToProps", basic)
 
     return {
         selectedPlace,

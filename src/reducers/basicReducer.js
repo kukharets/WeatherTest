@@ -1,8 +1,9 @@
-import { FETCH_PLACES, SELECT_PLACE, DELETE_PLACE } from "../actions/types";
+import {FETCH_PLACES, SELECT_PLACE, DELETE_PLACE, FETCH_WEATHER_SUCCESS, FETCH_WEATHER} from "../actions/types";
 
 const INIT_STATE = {
     places: [],
     selectedPlace: null,
+    weather: null,
 };
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
@@ -28,7 +29,19 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 selectedPlace: wasSelected ? null : selectedPlace,
-            }
+            };
+        case FETCH_WEATHER:{
+            return {
+                ...state,
+                weather: null,
+            };
+        }
+        case FETCH_WEATHER_SUCCESS: {
+            return {
+                ...state,
+                weather: action.payload,
+            };
+        }
         default:
             return state;
     }

@@ -14,14 +14,14 @@ class DailyWeather extends Component {
     }
     render() {
         const { weather } = this.props;
-        console.log("weather", weather)
 
         return (
             <div>
                 {weather &&
                 <div>
-                    Visibility: { weather.visibility }
-                    Temp: {weather.temp_max}
+                    Temperature: {weather.temp_max}
+                    <br/>
+                    Humidity: { weather.humidity }
                 </div>
                 }
                 {!weather && <ClipLoader

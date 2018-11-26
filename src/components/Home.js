@@ -8,7 +8,7 @@ import {
 import {connect} from "react-redux";
 import LocationSearchInput from "./LocationSearchInput";
 import Place from './Place';
-import Weather from './Weather';
+import WeatherBlock from './WeatherBlock';
 
 
 
@@ -17,18 +17,8 @@ class App extends Component {
         this.props.fetchPlaces();
     }
 
-    // deletePlace = () => {
-    //     const {selectedPlace, deletePlace} = this.props;
-    //     deletePlace(selectedPlace.key);
-    // };
-    // addPlace = () => {
-    //     const {selectedPlace, addPlace} = this.props;
-    //     addPlace(selectedPlace.key);
-    // };
-
     render() {
         const {places, selectedPlace, selectPlace} = this.props;
-        console.log("PROPS", this.props)
         return (
             <div className="p-5 h-100">
                 <div className="row h-100 w-100">
@@ -51,8 +41,8 @@ class App extends Component {
                                 places.map((place, index) => {
                                     return (
                                         <Place
+                                            key={index}
                                             data={place}
-                                            index={index}
                                             selectedPlace={selectedPlace}
                                             selectPlace={selectPlace}
                                         />
@@ -62,8 +52,8 @@ class App extends Component {
                         </form>
                     </div>
                     <div className="col-sm p-3">
-                        {this.props.selectedPlace ? (
-                            <Weather/>
+                        {(this.props.selectedPlace && this.props.selectedPlace.coordinates) ? (
+                            <WeatherBlock/>
                         ) : (
                             <h3 className="text-center">Choose the location</h3>
                         )}

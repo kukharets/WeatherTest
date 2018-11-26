@@ -5,25 +5,19 @@ import {connect} from "react-redux";
 import { ClipLoader } from 'react-spinners';
 
 
-class DailyWeather extends Component {
+class WeeklyWeather extends Component {
     componentDidMount(){
         const { selectedPlace, weather } = this.props;
-        if (selectedPlace && (!weather)) {
-            this.props.fetchWeather({place: selectedPlace, type: 'daily'})
+        if (selectedPlace && (!weather || (weather && !weather.list))) {
+            this.props.fetchWeather({place: selectedPlace, type: 'weekly'})
         }
     }
     render() {
         const { weather } = this.props;
-        console.log("weather", weather)
 
         return (
             <div>
-                {weather &&
-                <div>
-                    Visibility: { weather.visibility }
-                    Temp: {weather.temp_max}
-                </div>
-                }
+                Weekly Weather...
                 {!weather && <ClipLoader
                     sizeUnit={"px"}
                     size={50}
@@ -47,4 +41,4 @@ const mapStateToProps = ({ basic }) => {
 
 export default connect(mapStateToProps, {
     fetchWeather,
-})(DailyWeather);
+})(WeeklyWeather);
