@@ -7,24 +7,25 @@ import { ClipLoader } from 'react-spinners';
 
 class DailyWeather extends Component {
     componentDidMount(){
-        const { selectedPlace, weather } = this.props;
-        if (selectedPlace && (!weather)) {
+        const { selectedPlace } = this.props;
+        if (selectedPlace && (!selectedPlace.weather)) {
             this.props.fetchWeather({place: selectedPlace, type: 'daily'})
         }
     }
     render() {
-        const { weather } = this.props;
+        const { selectedPlace: {dailyWeather} } = this.props;
+        console.log("render of --> DAILY", this.props, this.state)
 
         return (
             <div>
-                {weather &&
+                {dailyWeather &&
                 <div>
-                    Temperature: {weather.temp_max}
+                    Temperature: {dailyWeather.temp_max}
                     <br/>
-                    Humidity: { weather.humidity }
+                    Humidity: { dailyWeather.humidity }
                 </div>
                 }
-                {!weather && <ClipLoader
+                {!dailyWeather && <ClipLoader
                     sizeUnit={"px"}
                     size={50}
                     color={'#123abc'}
@@ -35,16 +36,5 @@ class DailyWeather extends Component {
     }
 }
 
-const mapStateToProps = ({ basic }) => {
-    const {
-        selectedPlace, weather,
-    } = basic;
 
-    return {
-        selectedPlace, weather,
-    };
-};
-
-export default connect(mapStateToProps, {
-    fetchWeather,
-})(DailyWeather);
+export default DailyWeather;

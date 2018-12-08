@@ -3,12 +3,13 @@ import {
     fetchPlaces,
     selectPlace,
     deletePlace,
-    addPlace,
+    addPlace, fetchWeather,
 } from "../actions";
 import {connect} from "react-redux";
 import LocationSearchInput from "./LocationSearchInput";
 import Place from './Place';
 import WeatherBlock from './WeatherBlock';
+import Test from "./Test";
 
 
 
@@ -18,7 +19,8 @@ class App extends Component {
     }
 
     render() {
-        const {places, selectedPlace, selectPlace} = this.props;
+        const {places, selectedPlace, selectPlace, fetchWeather} = this.props;
+        console.log("render of --> Home", this.props, this.state)
         return (
             <div className="p-5 h-100">
                 <div className="row h-100 w-100">
@@ -53,7 +55,11 @@ class App extends Component {
                     </div>
                     <div className="col-sm p-3">
                         {(this.props.selectedPlace && this.props.selectedPlace.coordinates) ? (
-                            <WeatherBlock/>
+                            <span>
+                                <WeatherBlock fetchWeather={fetchWeather} selectedPlace={selectedPlace}/>
+                            <Test data='1' />
+                            </span>
+
                         ) : (
                             <h3 className="text-center">Choose the location</h3>
                         )}
@@ -79,5 +85,6 @@ export default connect(
         selectPlace,
         deletePlace,
         addPlace,
+        fetchWeather
     }
 )(App);

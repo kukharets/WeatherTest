@@ -13,6 +13,8 @@ class WeeklyWeather extends Component {
         }
     }
     render() {
+        console.log("render of --> Weekle", this.props, this.state)
+
         const { weather } = this.props;
 
         return (

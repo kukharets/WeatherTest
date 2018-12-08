@@ -9,6 +9,8 @@ class Place extends Component {
     };
 
     render() {
+        console.log("render of --> Place", this.props, this.state)
+
         const {data, selectedPlace} = this.props;
         const {address, key} = data;
         const attachClass =

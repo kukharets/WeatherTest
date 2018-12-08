@@ -27,23 +27,29 @@ class WeatherBlock extends Component {
         })
     };
     render() {
-        const { selectedPlace } = this.props;
-        const { address } = selectedPlace;
+        console.warn("render of --> WeatherBlock", this.props, this.state)
+
+        const { selectedPlace, lol, fetchWeather } = this.props;
         return (
             <div>
                 <div>
-                    <h3>
-                        <b>Weather in</b> {address}:
+                    <h3>{lol}
+                        <b>Weather in</b>
                         <br/>
                         <ButtonGroup>
                             <Button color="second" onClick={this.onRadioBtnClick} active={this.state.type === 'daily'}>Daily</Button>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <Button color="gray" onClick={this.onRadioBtnClick} active={this.state.type === 'weekly'}>Weekly</Button>
                         </ButtonGroup>
-                        {this.state.type === 'daily' && <DailyWeather />}
-                        {this.state.type === 'weekly' && <WeeklyWeather />}
-                        {!selectedPlace.key && <button className="btn btn-primary" onClick={this.addPlace}>SAVE PLACE</button>}
-                        {selectedPlace.key && <button className="btn btn-danger" onClick={this.deletePlace}>DELETE PLACE</button>}
+                        {selectedPlace && (
+                            <span>
+                                {this.state.type === 'daily' && <DailyWeather fetchWeather={fetchWeather} selectedPlace={selectedPlace}/>}
+                                {this.state.type === 'weekly' && <WeeklyWeather />}
+                                {!selectedPlace.key && <button className="btn btn-primary" onClick={this.addPlace}>SAVE PLACE</button>}
+                                {selectedPlace.key && <button className="btn btn-danger" onClick={this.deletePlace}>DELETE PLACE</button>}
+                            </span>
+                        )}
+
                     </h3>
                 </div>
             </div>
@@ -51,18 +57,5 @@ class WeatherBlock extends Component {
     }
 }
 
-const mapStateToProps = ({ basic }) => {
-    const {
-        selectedPlace,
-    } = basic;
 
-    return {
-        selectedPlace,
-    };
-};
-
-export default connect(mapStateToProps, {
-    addPlace,
-    deletePlace,
-    fetchWeather,
-})(WeatherBlock);
+export default WeatherBlock;

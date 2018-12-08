@@ -32,6 +32,7 @@ export const selectPlace = place => async dispatch => {
 };
 
 export const fetchWeather = data => async dispatch => {
+    console.log("FW")
     const { place, type } = data;
     const { coordinates } = place;
     if (type === 'weekly') {
@@ -54,7 +55,7 @@ export const fetchWeather = data => async dispatch => {
             success: function(data){
                     dispatch({
                         type: FETCH_WEATHER_SUCCESS,
-                        payload: data.main,
+                        payload: Object.assign(place, {dailyWeather: data.main}),
                     })
             }
         });

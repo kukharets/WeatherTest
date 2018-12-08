@@ -3,7 +3,6 @@ import {FETCH_PLACES, SELECT_PLACE, DELETE_PLACE, FETCH_WEATHER_SUCCESS, FETCH_W
 const INIT_STATE = {
     places: [],
     selectedPlace: null,
-    weather: null,
 };
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
@@ -37,9 +36,17 @@ export default (state = INIT_STATE, action) => {
             };
         }
         case FETCH_WEATHER_SUCCESS: {
+            const updatedItems = state.places.map(item => {
+                if(item.id === action.payload.id){
+                    return { ...item, ...action.payload }
+                }
+                return item
+            })
+            console.log("redux", action.payload, updatedItems)
             return {
                 ...state,
-                weather: action.payload,
+                places: updatedItems,
+                selectedPlace: action.payload,
             };
         }
         default:

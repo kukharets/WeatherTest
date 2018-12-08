@@ -9,9 +9,10 @@ import reduxThunk from "redux-thunk";
 import reducers from "./reducers";
 import App from "./App";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
-
+const store = createStore(reducers, composeWithDevTools(
+    applyMiddleware(reduxThunk)));
 class AppWrapper extends Component {
     state = {
         gmapsLoaded: false,
