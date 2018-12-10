@@ -10,8 +10,40 @@ import LocationSearchInput from "./LocationSearchInput";
 import Place from './Place';
 import WeatherBlock from './WeatherBlock';
 import Test from "./Test";
+import { BrowserRouter, NavLink, Redirect, Switch, Route } from 'react-router-dom'
+import Navigation from "./Navigation";
 
+class Login extends Component {
+    render() {
+        console.log("Login render", this)
 
+        return(
+            <div>LOGIN PAGE
+                <NavLink to="/register" activeClassName="active">REGISTER</NavLink></div>
+        )
+    }
+}
+
+class Superlock extends Component {
+    render() {
+        console.log("SuperlockENDDDDD render")
+
+        return(
+            <div>SuperlockENDDDDD PAGE</div>
+        )
+    }
+}
+
+class Root extends Component {
+    render() {
+        console.log("Root render")
+
+        return(
+            <div>ROOT PAGE
+                <NavLink to="/superlock" activeClassName="active">SUPERLOCK</NavLink></div>
+        )
+    }
+}
 
 class App extends Component {
     componentWillMount() {
@@ -21,50 +53,17 @@ class App extends Component {
     render() {
         const {places, selectedPlace, selectPlace, fetchWeather} = this.props;
         console.log("render of --> Home", this.props, this.state)
+        // if ((Math.floor((Math.random() * 100) + 1))) {
+        //     return <Redirect to='/login' />
+        // }
         return (
             <div className="p-5 h-100">
-                <div className="row h-100 w-100">
-                    <div className="col-sm border-right p-3">
-                        <form className="card card-sm">
-                            <div
-                                style={{marginBottom: "0"}}
-                                className="card-body row no-gutters align-items-center"
-                            >
-                                <div className="col-auto">
-                                    <i className="fas fa-search h4 text-body"/>
-                                </div>
-                                <div className="col">
-                                    <LocationSearchInput/>
-                                </div>
-                            </div>
-                            <div style={{height: "60vh", overflowY: 'scroll'}} className="p-1 scrolling">
+                <Navigation/>
+                <Root/>
+                <Switch>
+                    <Route exact path='/superlock' component={Superlock}/>
+                </Switch>
 
-                                {places.length > 0 &&
-                                places.map((place, index) => {
-                                    return (
-                                        <Place
-                                            key={index}
-                                            data={place}
-                                            selectedPlace={selectedPlace}
-                                            selectPlace={selectPlace}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        </form>
-                    </div>
-                    <div className="col-sm p-3">
-                        {(this.props.selectedPlace && this.props.selectedPlace.coordinates) ? (
-                            <span>
-                                <WeatherBlock fetchWeather={fetchWeather} selectedPlace={selectedPlace}/>
-                            <Test data='1' />
-                            </span>
-
-                        ) : (
-                            <h3 className="text-center">Choose the location</h3>
-                        )}
-                    </div>
-                </div>
             </div>
         );
     }

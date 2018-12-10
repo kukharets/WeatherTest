@@ -10,7 +10,7 @@ import reducers from "./reducers";
 import App from "./App";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
+import { BrowserRouter } from 'react-router-dom'
 const store = createStore(reducers, composeWithDevTools(
     applyMiddleware(reduxThunk)));
 class AppWrapper extends Component {
@@ -43,8 +43,8 @@ class AppWrapper extends Component {
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppWrapper><App /></AppWrapper>
 
+        <BrowserRouter><App /></BrowserRouter>
     </Provider>,
     document.getElementById("root")
 );

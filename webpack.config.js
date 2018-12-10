@@ -41,5 +41,5 @@ module.exports = {
             filename: "./index.html"
         }),
         new ExtractTextPlugin({filename: 'style.css'})
-    ]
+    ],
 };
